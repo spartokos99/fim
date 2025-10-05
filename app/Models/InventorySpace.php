@@ -23,6 +23,11 @@ class InventorySpace extends Model
             $model->user_id = auth()->id();
         });
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
     #endregion
 
     #region: Relationships

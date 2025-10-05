@@ -15,6 +15,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 {
     use Notifiable;
 
+    #region: Default Variables
     protected $fillable = [
         'name',
         'email',
@@ -35,24 +36,27 @@ class User extends Authenticatable implements FilamentUser, HasTenants
             'password' => 'hashed',
         ];
     }
+    #endregion
 
-    public function tenants(): BelongsToMany
+    #region: Tenancy Functions
+    public function inventorySpaces(): BelongsToMany
     {
-        return $this->belongsToMany(Tenant::class);
+        return $this->belongsToMany(InventorySpace::class, 'tenant_user', 'tenant_id', 'user_id');
     }
 
     public function getTenants(Panel $panel): Collection
     {
-        return $this->tenants;
+        return $this->inventorySpaces;
     }
 
-    public function canAccessTenant(Model $tenant): bool
+    public function canAccessTenant(Model $iventorySpace): bool
     {
-        return $this->tenants()->whereKey($tenant)->exists();
+        return $this->inventorySpaces()->whereKey($iventorySpace)->exists();
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
     }
+    #endregion
 }

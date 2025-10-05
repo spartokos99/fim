@@ -2,7 +2,7 @@
 
 namespace App\Filament\Pages\Tenancy;
 
-use App\Models\Tenant;
+use App\Models\InventorySpace;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Pages\Tenancy\RegisterTenant;
@@ -10,11 +10,11 @@ use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Support\Str;
 
-class RegTenant extends RegisterTenant
+class RegisterInventorySpace extends RegisterTenant
 {
     public static function getLabel(): string
     {
-        return 'Register tenant';
+        return 'Register InventorySpace';
     }
 
     public function form(Schema $schema): Schema
@@ -36,11 +36,12 @@ class RegTenant extends RegisterTenant
             ]);
     }
 
-    protected function handleRegistration(array $data): Tenant
+    protected function handleRegistration(array $data): InventorySpace
     {
-        $tenant = Tenant::create($data);
-
-        $tenant->members()->attach(auth()->user());
+        $tenant = InventorySpace::create($data);
+        $tenant->members()->attach(auth()->user(), [
+            'created_at' => now()
+        ]);
 
         return $tenant;
     }

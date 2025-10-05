@@ -15,7 +15,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 {
     use Notifiable;
 
-    #region: Default Variables
+    #region: Default Properties
     protected $fillable = [
         'name',
         'email',

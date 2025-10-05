@@ -8,7 +8,7 @@ class InventorySpace extends Model
 {
     protected $table = 'tenants';
 
-    #region: Default Variables
+    #region: Default Properties
     protected $fillable = [
         'name',
         'slug',

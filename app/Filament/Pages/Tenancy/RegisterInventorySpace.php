@@ -39,6 +39,8 @@ class RegisterInventorySpace extends RegisterTenant
     protected function handleRegistration(array $data): InventorySpace
     {
         $tenant = InventorySpace::create($data);
+
+        // attach user to the newly created tenant and set the current time in db
         $tenant->members()->attach(auth()->user(), [
             'created_at' => now()
         ]);

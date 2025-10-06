@@ -9,7 +9,6 @@ use Filament\Forms\Components\Repeater;
 use Filament\Notifications\Notification;
 use Filament\Support\Colors\Color;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Http\Request;
 
 class InventorySpaceController extends Controller
 {
@@ -29,7 +28,7 @@ class InventorySpaceController extends Controller
                         ->title('Invitation not found')
                         ->body('Error while deleting the invitation. Please refresh the page and try again.')
                         ->icon(Heroicon::ExclamationTriangle)
-                        ->color('danger')
+                        ->color(Color::Red)
                         ->send();
 
                     return;

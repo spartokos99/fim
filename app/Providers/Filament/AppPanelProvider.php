@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Tenancy\EditInventorySpace;
 use App\Filament\Pages\Tenancy\RegisterInventorySpace;
+use App\Http\Middleware\TenantPermission;
 use App\Models\InventorySpace;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -43,6 +44,9 @@ class AppPanelProvider extends PanelProvider
             ->widgets([
                 AccountWidget::class,
                 FilamentInfoWidget::class,
+            ])
+            ->tenantMiddleware([
+                TenantPermission::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends \Spatie\Permission\Models\Role
 {
-    protected $fillable = ['name', 'guard_name', 'tenant_id'];
+    protected $fillable = ['name', 'guard_name', 'inventory_space_id'];
 }

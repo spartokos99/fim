@@ -11,7 +11,7 @@ class RegisterInventorySpace extends RegisterTenant
 {
     public static function getLabel(): string
     {
-        return 'Register InventorySpace';
+        return 'Register Inventory Space';
     }
 
     public function form(Schema $schema): Schema

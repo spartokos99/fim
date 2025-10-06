@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Tenancy\EditInventorySpace;
 use App\Filament\Pages\Tenancy\RegisterInventorySpace;
+use App\Http\Middleware\InventorySpaceColor;
 use App\Http\Middleware\TenantPermission;
 use App\Models\InventorySpace;
 use Filament\Http\Middleware\Authenticate;
@@ -47,6 +48,7 @@ class AppPanelProvider extends PanelProvider
             ])
             ->tenantMiddleware([
                 TenantPermission::class,
+                InventorySpaceColor::class
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -62,6 +64,7 @@ class AppPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->databaseNotifications()
             ->tenant(InventorySpace::class, slugAttribute: 'slug')
             ->tenantRegistration(RegisterInventorySpace::class)
             ->tenantProfile(EditInventorySpace::class);

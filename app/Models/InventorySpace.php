@@ -3,10 +3,11 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class InventorySpace extends Model
 {
-    protected $table = 'tenants';
+    protected $table = 'inventory_spaces';
 
     protected $fillable = [
         'name',
@@ -31,7 +32,12 @@ class InventorySpace extends Model
     //region Relationships
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'tenant_user', 'tenant_id', 'user_id');
+        return $this->belongsToMany(User::class, 'inventory_space_user', 'inventory_space_id', 'user_id');
+    }
+
+    public function invitations(): HasMany
+    {
+        return $this->hasMany(InventorySpaceInvitation::class);
     }
     //endregion
 }

@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Collection;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasTenants
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     protected $fillable = [
         'name',

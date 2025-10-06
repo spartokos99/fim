@@ -3,6 +3,7 @@
         "aaron-bond.better-comments",
         "amiralizadeh9480.laravel-extra-intellisense",
         "devsense.phptools-vscode",
-        "linjun.sqlite-support"
+        "linjun.sqlite-support",
+        "hediet.vscode-drawio"
     ]
 }

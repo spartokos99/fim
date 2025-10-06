@@ -31,7 +31,7 @@ class InventorySpace extends Model
     //region Relationships
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'tenant_user', 'user_id', 'tenant_id');
+        return $this->belongsToMany(User::class, 'tenant_user', 'tenant_id', 'user_id');
     }
     //endregion
 }

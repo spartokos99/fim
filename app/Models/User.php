@@ -40,7 +40,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     //region Relationships
     public function inventorySpaces(): BelongsToMany
     {
-        return $this->belongsToMany(InventorySpace::class, 'tenant_user', 'tenant_id', 'user_id');
+        return $this->belongsToMany(InventorySpace::class, 'tenant_user', 'user_id', 'tenant_id');
     }
     //endregion
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\InventorySpace;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -24,7 +25,7 @@ return new class extends Migration
 
         Schema::create('tenant_user', function(Blueprint $table){
             $table->id();
-            $table->foreignIdFor(Tenant::class)
+            $table->foreignIdFor(InventorySpace::class, 'tenant_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');

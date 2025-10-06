@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Tenancy\EditInventorySpace;
 use App\Filament\Pages\Tenancy\RegisterInventorySpace;
 use App\Models\InventorySpace;
 use Filament\Http\Middleware\Authenticate;
@@ -58,6 +59,7 @@ class AppPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->tenant(InventorySpace::class, slugAttribute: 'slug')
-            ->tenantRegistration(RegisterInventorySpace::class);
+            ->tenantRegistration(RegisterInventorySpace::class)
+            ->tenantProfile(EditInventorySpace::class);
     }
 }

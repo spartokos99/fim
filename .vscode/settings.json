@@ -1,0 +1,20 @@
+{
+    "better-comments.tags": [
+    {
+        "tag": "region",
+        "color": "#e67e22",
+        "strikethrough": false,
+        "underline": false,
+        "bold": true,
+        "italic": false
+    },
+    {
+        "tag": "endregion",
+        "color": "#e67e22",
+        "strikethrough": false,
+        "underline": false,
+        "bold": true,
+        "italic": false
+    }
+]
+}

@@ -15,7 +15,6 @@ class User extends Authenticatable implements FilamentUser, HasTenants
 {
     use Notifiable;
 
-    #region: Default Properties
     protected $fillable = [
         'name',
         'email',
@@ -36,14 +35,16 @@ class User extends Authenticatable implements FilamentUser, HasTenants
             'password' => 'hashed',
         ];
     }
-    #endregion
 
-    #region: Tenancy Functions
+    
+    //region Relationships
     public function inventorySpaces(): BelongsToMany
     {
         return $this->belongsToMany(InventorySpace::class, 'tenant_user', 'tenant_id', 'user_id');
     }
+    //endregion
 
+    //region Tenancy Functions
     public function getTenants(Panel $panel): Collection
     {
         return $this->inventorySpaces;
@@ -58,5 +59,5 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     {
         return true;
     }
-    #endregion
+    //endregion
 }

@@ -37,7 +37,7 @@ class EditInventorySpace extends EditTenantProfile
                                 Repeater::make('Members')
                                     ->label('Manager members')
                                     ->relationship('members')
-                                    ->disableItemCreation()
+                                    ->addable(false)
                                     ->table([
                                         TableColumn::make('User Name'),
                                         TableColumn::make('Role'),
@@ -87,7 +87,7 @@ class EditInventorySpace extends EditTenantProfile
                                             ->required()
                                             ->disabled()
                                     ])
-                                ->disableItemCreation()
+                                ->addable(false)
                                 ->deleteAction(fn (Action $action) => InventorySpaceController::handleDeleteInvitation($action))
                             ])
                         //endregion

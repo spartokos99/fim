@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Users\Schemas;
+namespace App\Filament\Pages\Tenancy;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ColorPicker;

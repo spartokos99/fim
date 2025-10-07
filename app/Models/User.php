@@ -37,7 +37,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         ];
     }
 
-    
+
     //region Relationships
     public function inventorySpaces(): BelongsToMany
     {
@@ -51,9 +51,9 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         return $this->inventorySpaces;
     }
 
-    public function canAccessTenant(Model $iventorySpace): bool
+    public function canAccessTenant(Model $tenant): bool
     {
-        return $this->inventorySpaces()->whereKey($iventorySpace)->exists();
+        return $this->inventorySpaces()->whereKey($tenant)->exists();
     }
 
     public function canAccessPanel(Panel $panel): bool

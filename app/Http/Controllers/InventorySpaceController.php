@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InventorySpace;
 use App\Models\InventorySpaceInvitation;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
@@ -12,6 +13,21 @@ use Filament\Support\Icons\Heroicon;
 
 class InventorySpaceController extends Controller
 {
+    //region InventorySpace Functions
+    public static function handleRegisterInventorySpace(array $data): InventorySpace|null
+    {
+        $tenant = InventorySpace::create($data);
+
+        // attach user to the newly created tenant and set the current time in db
+        $tenant->members()->attach(auth()->user(), [
+            'created_at' => now()
+        ]);
+
+        return $tenant;
+    }
+    //endregion
+
+    //region User Invitations
     public static function handleDeleteInvitation(Action $action): Action|null
     {
         return $action
@@ -47,4 +63,5 @@ class InventorySpaceController extends Controller
                 ]);
             });
     }
+    //endregion
 }

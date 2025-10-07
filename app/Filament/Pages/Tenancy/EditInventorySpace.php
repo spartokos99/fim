@@ -2,9 +2,10 @@
 
 namespace App\Filament\Pages\Tenancy;
 
-use App\Filament\Resources\Users\Schemas\TenantForm;
+use App\Filament\Pages\Tenancy\TenantForm;
 use App\Http\Controllers\InventorySpaceController;
 use Filament\Actions\Action;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Repeater\TableColumn;
@@ -28,7 +29,38 @@ class EditInventorySpace extends EditTenantProfile
             [
                 Tabs::make('Tabs')
                     ->tabs([
+                        //region Tab : Members
+                        Tab::make('Members')
+                            ->badge(Filament::getTenant()->members()->count())
+                            ->badgeColor('primary')
+                            ->schema([
+                                Repeater::make('Members')
+                                    ->label('Manager members')
+                                    ->relationship('members')
+                                    ->disableItemCreation()
+                                    ->table([
+                                        TableColumn::make('User Name'),
+                                        TableColumn::make('Role'),
+                                        TableColumn::make('Member since'),
+                                    ])
+                                    ->schema([
+                                        TextInput::make('name')
+                                            ->required()
+                                            ->disabled(),
+                                        TextInput::make('role')
+                                            ->required()
+                                            ->disabled(),
+                                        DateTimePicker::make('created_at')
+                                            ->required()
+                                            ->disabled()
+                                    ])
+                            ]),
+                        //endregion
+
+                        //region Tab : Invitations
                         Tab::make('Invitations')
+                            ->badge(Filament::getTenant()->invitations()->count())
+                            ->badgeColor('secondary')
                             ->schema([
                                 Repeater::make('Invitations')
                                     ->label('Manage user invitations')
@@ -58,6 +90,7 @@ class EditInventorySpace extends EditTenantProfile
                                 ->disableItemCreation()
                                 ->deleteAction(fn (Action $action) => InventorySpaceController::handleDeleteInvitation($action))
                             ])
+                        //endregion
                     ])
         ]));
     }

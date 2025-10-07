@@ -2,18 +2,17 @@
 
 namespace App\Filament\Pages\Tenancy;
 
-use App\Filament\Pages\Tenancy\TenantForm;
-use App\Http\Controllers\InventorySpaceController;
-use Filament\Actions\Action;
+use App\Filament\Resources\InventorySpaces\RelationManagers\InvitationsRelationManager;
+use App\Filament\Resources\InventorySpaces\RelationManagers\MembersRelationManager;
 use Filament\Facades\Filament;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Repeater\TableColumn;
-use Filament\Forms\Components\TextInput;
+use Filament\Pages\Page;
 use Filament\Pages\Tenancy\EditTenantProfile;
+use Filament\Schemas\Components\Livewire;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 
 class EditInventorySpace extends EditTenantProfile
 {
@@ -26,73 +25,44 @@ class EditInventorySpace extends EditTenantProfile
     {
         return $schema
             ->components(array_merge(TenantForm::getFields(true),
-            [
-                Tabs::make('Tabs')
-                    ->tabs([
-                        //region Tab : Members
-                        Tab::make('Members')
-                            ->badge(Filament::getTenant()->members()->count())
-                            ->badgeColor('primary')
-                            ->schema([
-                                Repeater::make('Members')
-                                    ->label('Manager members')
-                                    ->relationship('members')
-                                    ->addable(false)
-                                    ->table([
-                                        TableColumn::make('User Name'),
-                                        TableColumn::make('Role'),
-                                        TableColumn::make('Member since'),
-                                    ])
-                                    ->schema([
-                                        TextInput::make('name')
-                                            ->required()
-                                            ->disabled(),
-                                        TextInput::make('role')
-                                            ->required()
-                                            ->disabled(),
-                                        DateTimePicker::make('created_at')
-                                            ->required()
-                                            ->disabled()
-                                    ])
-                            ]),
-                        //endregion
+                [
+                    Tabs::make('Tabs')
+                        ->contained(false)
+                        ->tabs([
+                            //region Tab : Members
+                            Tab::make('Members')
+                                ->icon(Heroicon::Users)
+                                ->badge(Filament::getTenant()->members()->count())
+                                ->badgeColor('primary')
+                                ->schema([
+                                    Livewire::make(
+                                        MembersRelationManager::class,
+                                        fn(Page $livewire, $record) => [
+                                            'ownerRecord' => $record,
+                                            'pageClass' => $livewire::class
+                                        ]
+                                    )
+                                ]),
+                            //endregion
 
-                        //region Tab : Invitations
-                        Tab::make('Invitations')
-                            ->badge(Filament::getTenant()->invitations()->count())
-                            ->badgeColor('secondary')
-                            ->schema([
-                                Repeater::make('Invitations')
-                                    ->label('Manage user invitations')
-                                    ->relationship('invitations')
-                                    ->table([
-                                        TableColumn::make('User Name'),
-                                        TableColumn::make('Inviter'),
-                                        TableColumn::make('Status'),
-                                        TableColumn::make('Expires At')
-                                    ])
-                                    ->schema([
-                                        TextInput::make('user_name')
-                                            ->required()
-                                            ->disabled()
-                                            ->formatStateUsing(fn ($state, $record) => $record?->user?->name),
-                                        TextInput::make('inviter_name')
-                                            ->required()
-                                            ->disabled()
-                                            ->formatStateUsing(fn ($state, $record) => $record?->inviter?->name),
-                                        TextInput::make('status')
-                                            ->required()
-                                            ->disabled(),
-                                        DateTimePicker::make('expires_at')
-                                            ->required()
-                                            ->disabled()
-                                    ])
-                                ->addable(false)
-                                ->deleteAction(fn (Action $action) => InventorySpaceController::handleDeleteInvitation($action))
-                            ])
-                        //endregion
-                    ])
-        ]));
+                            //region Tab : Invitations
+                            Tab::make('Invitations')
+                                ->icon(Heroicon::Envelope)
+                                ->badge(Filament::getTenant()->invitations()->count())
+                                ->badgeColor('secondary')
+                                ->schema([
+                                    Livewire::make(
+                                        InvitationsRelationManager::class,
+                                        fn(Page $livewire, $record) => [
+                                            'ownerRecord' => $record,
+                                            'pageClass' => $livewire::class
+                                        ]
+                                    )
+                                ])
+                            //endregion
+                        ])
+                ]
+            ));
     }
 
     //TODO: Refresh page after saving settings

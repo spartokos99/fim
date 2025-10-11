@@ -1,0 +1,31 @@
+{
+    "name": "Laravel Dev",
+
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+
+    "workspaceFolder": "/var/www/html",
+
+    "forwardPorts": [8000],
+
+    "portsAttributes": {
+        "8000": {
+            "label": "Laravel Dev Server",
+            "onAutoForward": "notify"
+        }
+    },
+
+    "features": {},
+
+    "customizations": {
+        "vscode": {
+            "extensions": []
+        }
+    },
+
+    "postCreateCommand": "composer install && npm install",
+
+    "remoteUser": "vscode"
+}

@@ -51,6 +51,9 @@ RUN chown -R $USERNAME:$USERNAME /workspaces/fim
 # Wechsle zu Nicht-Root-Benutzer
 USER $USERNAME
 
+# Trust Project
+RUN git config --global --add safe.directory /workspaces/fim
+
 # Exponiere Port (für Laravel Development Server + Vite)
 EXPOSE 8000 5173
 

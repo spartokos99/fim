@@ -6,6 +6,8 @@
         "context": "."
     },
 
+    "runArgs": ["--name", "dev-fim-01"],
+
     "workspaceFolder": "/workspaces/fim",
 
     "forwardPorts": [8000, 5173],

@@ -16,13 +16,20 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # Installiere System-Abhängigkeiten
 RUN apt-get update && apt-get install -y \
+    nano \
     git \
+    curl \
+    wget \
+    zsh \
+    fonts-powerline \
     unzip \
     libicu-dev \
     libzip-dev \
     libonig-dev \
     libsqlite3-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \
+    && chsh -s $(which zsh)
 
 # Installiere PHP-Extensionen
 RUN docker-php-ext-install \
@@ -58,4 +65,8 @@ RUN git config --global --add safe.directory /workspaces/fim
 EXPOSE 8000 5173
 
 # Standard-Befehl für Dev Container (bash für interaktive Entwicklung)
-CMD ["/bin/bash"]
+CMD ["/bin/zsh"]
+
+# CLI Theme ändern
+RUN echo "ZSH_THEME=\"agnoster\"" >> ~/.zshrc
+RUN echo "PROMPT='%F{cyan}%n%f %F{yellow}%~%f %# '" >> ~/.zshrc

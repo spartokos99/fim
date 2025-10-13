@@ -4,7 +4,6 @@ namespace App\Filament\Pages\Tenancy;
 
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Support\Str;
 

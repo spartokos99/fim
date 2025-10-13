@@ -39,5 +39,10 @@ class InventorySpace extends Model
     {
         return $this->hasMany(InventorySpaceInvitation::class);
     }
+
+    public function roles(): HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
     //endregion
 }

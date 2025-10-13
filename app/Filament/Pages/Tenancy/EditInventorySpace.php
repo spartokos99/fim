@@ -4,6 +4,7 @@ namespace App\Filament\Pages\Tenancy;
 
 use App\Filament\Resources\InventorySpaces\RelationManagers\InvitationsRelationManager;
 use App\Filament\Resources\InventorySpaces\RelationManagers\MembersRelationManager;
+use App\Filament\Resources\InventorySpaces\RelationManagers\RolesRelationManager;
 use Filament\Facades\Filament;
 use Filament\Pages\Page;
 use Filament\Pages\Tenancy\EditTenantProfile;
@@ -53,6 +54,22 @@ class EditInventorySpace extends EditTenantProfile
                                 ->schema([
                                     Livewire::make(
                                         InvitationsRelationManager::class,
+                                        fn(Page $livewire, $record) => [
+                                            'ownerRecord' => $record,
+                                            'pageClass' => $livewire::class
+                                        ]
+                                    )
+                                ]),
+                            //endregion
+
+                            //region Tab : Roles
+                            Tab::make('Roles')
+                                ->icon(Heroicon::UserGroup)
+                                ->badge(Filament::getTenant()->roles()->count())
+                                ->badgeColor('secondary')
+                                ->schema([
+                                    Livewire::make(
+                                        RolesRelationManager::class,
                                         fn(Page $livewire, $record) => [
                                             'ownerRecord' => $record,
                                             'pageClass' => $livewire::class

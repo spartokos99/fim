@@ -3,10 +3,7 @@
 namespace App\Filament\Resources\InventorySpaces\RelationManagers;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DetachAction;
-use Filament\Actions\DetachBulkAction;
 use Filament\Actions\ViewAction;
-use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -14,24 +11,16 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class MembersRelationManager extends RelationManager
+class RolesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'members';
+    protected static string $relationship = 'roles';
 
     public function form(Schema $schema): Schema
     {
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
-                TextInput::make('email')
-                    ->label('Email address')
-                    ->email()
-                    ->required(),
-                DateTimePicker::make('email_verified_at'),
-                TextInput::make('password')
-                    ->password()
-                    ->required(),
+                    ->required()
             ]);
     }
 
@@ -39,10 +28,7 @@ class MembersRelationManager extends RelationManager
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('email')
-                    ->label('Email address')
-                    ->placeholder('-'),
+                TextEntry::make('name')
             ]);
     }
 
@@ -52,10 +38,6 @@ class MembersRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('email')
-                    ->label('Email address')
-                    ->placeholder('-')
                     ->searchable()
             ])
             ->filters([
@@ -65,11 +47,9 @@ class MembersRelationManager extends RelationManager
             ])
             ->recordActions([
                 ViewAction::make(),
-                DetachAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DetachBulkAction::make(),
                 ]),
             ]);
     }

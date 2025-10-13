@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
     libicu-dev \
     libzip-dev \
     libonig-dev \
+    libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Installiere PHP-Extensionen
@@ -42,10 +43,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && rm -rf /var/lib/apt/lists/*
 
 # Setze Arbeitsverzeichnis
-WORKDIR /var/www/html
+WORKDIR /workspaces/fim
 
 # Setze Benutzerrechte
-RUN chown -R $USERNAME:$USERNAME /var/www/html
+RUN chown -R $USERNAME:$USERNAME /workspaces/fim
 
 # Wechsle zu Nicht-Root-Benutzer
 USER $USERNAME

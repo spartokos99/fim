@@ -6,7 +6,7 @@
         "context": "."
     },
 
-    "workspaceFolder": "/var/www/html",
+    "workspaceFolder": "/workspaces/fim",
 
     "forwardPorts": [8000],
 
@@ -21,7 +21,16 @@
 
     "customizations": {
         "vscode": {
-            "extensions": []
+            "extensions": [
+                "aaron-bond.better-comments",
+                "hediet.vscode-drawio",
+                "DEVSENSE.composer-php-vscode",
+                "amiralizadeh9480.laravel-extra-intellisense",
+                "DEVSENSE.phptools-vscode",
+                "LinJun.sqlite-support",
+                "EditorConfig.EditorConfig",
+                "ms-azuretools.vscode-containers"
+            ]
         }
     },
 

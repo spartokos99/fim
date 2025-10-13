@@ -1,0 +1,58 @@
+{
+    "name": "Laravel Dev",
+
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": "."
+    },
+
+    "runArgs": ["--name", "dev-fim-01"],
+
+    "workspaceFolder": "/workspaces/fim",
+
+    "forwardPorts": [8000, 5173],
+
+    "portsAttributes": {
+        "8000": {
+            "label": "Laravel Dev Server",
+            "onAutoForward": "notify"
+        },
+        "5173": {
+            "label": "Vite Backend",
+            "onAutoForward": "notify"
+        }
+    },
+
+    "features": {},
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "aaron-bond.better-comments",
+                "hediet.vscode-drawio",
+                "DEVSENSE.composer-php-vscode",
+                "amiralizadeh9480.laravel-extra-intellisense",
+                "DEVSENSE.phptools-vscode",
+                "LinJun.sqlite-support",
+                "EditorConfig.EditorConfig",
+                "ms-azuretools.vscode-containers"
+            ]
+        }
+    },
+
+    "postCreateCommand": "composer install && npm install",
+
+    "remoteUser": "vscode",
+
+    "remoteEnv": {
+        "APP_NAME": "FIM Dev Build",
+        "APP_ENV": "local",
+        "APP_KEY": "",
+        "APP_URL": "http://localhost:8000",
+        "APP_DEBUG": "true",
+
+        "DB_CONNECTION": "sqlite",
+
+        "SESSION_DRIVER": "database"
+    }
+}

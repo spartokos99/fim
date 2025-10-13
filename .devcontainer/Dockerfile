@@ -51,8 +51,8 @@ RUN chown -R $USERNAME:$USERNAME /workspaces/fim
 # Wechsle zu Nicht-Root-Benutzer
 USER $USERNAME
 
-# Exponiere Port (für Laravel Development Server)
-EXPOSE 8000
+# Exponiere Port (für Laravel Development Server + Vite)
+EXPOSE 8000 5173
 
 # Standard-Befehl für Dev Container (bash für interaktive Entwicklung)
 CMD ["/bin/bash"]

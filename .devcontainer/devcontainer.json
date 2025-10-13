@@ -8,11 +8,15 @@
 
     "workspaceFolder": "/workspaces/fim",
 
-    "forwardPorts": [8000],
+    "forwardPorts": [8000, 5173],
 
     "portsAttributes": {
         "8000": {
             "label": "Laravel Dev Server",
+            "onAutoForward": "notify"
+        },
+        "5173": {
+            "label": "Vite Backend",
             "onAutoForward": "notify"
         }
     },
@@ -36,5 +40,17 @@
 
     "postCreateCommand": "composer install && npm install",
 
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+
+    "remoteEnv": {
+        "APP_NAME": "FIM Dev Build",
+        "APP_ENV": "local",
+        "APP_KEY": "",
+        "APP_URL": "http://localhost:8000",
+        "APP_DEBUG": "true",
+
+        "DB_CONNECTION": "sqlite",
+
+        "SESSION_DRIVER": "database"
+    }
 }

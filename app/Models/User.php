@@ -19,6 +19,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
     protected $fillable = [
         'name',
         'email',
+        'username',
         'password',
         'anon_token'
     ];

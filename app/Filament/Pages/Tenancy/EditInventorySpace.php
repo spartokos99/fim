@@ -9,7 +9,6 @@ use Filament\Facades\Filament;
 use Filament\Pages\Page;
 use Filament\Pages\Tenancy\EditTenantProfile;
 use Filament\Schemas\Components\Livewire;
-use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
@@ -27,6 +26,7 @@ class EditInventorySpace extends EditTenantProfile
         return $schema
             ->components(array_merge(TenantForm::getFields(true),
                 [
+                    //TODO: refresh badges after actions
                     Tabs::make('Tabs')
                         ->contained(false)
                         ->tabs([
@@ -35,6 +35,7 @@ class EditInventorySpace extends EditTenantProfile
                                 ->icon(Heroicon::Users)
                                 ->badge(Filament::getTenant()->members()->count())
                                 ->badgeColor('primary')
+                                ->live()
                                 ->schema([
                                     Livewire::make(
                                         MembersRelationManager::class,
@@ -51,6 +52,7 @@ class EditInventorySpace extends EditTenantProfile
                                 ->icon(Heroicon::Envelope)
                                 ->badge(Filament::getTenant()->invitations()->count())
                                 ->badgeColor('secondary')
+                                ->live()
                                 ->schema([
                                     Livewire::make(
                                         InvitationsRelationManager::class,
@@ -67,6 +69,7 @@ class EditInventorySpace extends EditTenantProfile
                                 ->icon(Heroicon::UserGroup)
                                 ->badge(Filament::getTenant()->roles()->count())
                                 ->badgeColor('secondary')
+                                ->live()
                                 ->schema([
                                     Livewire::make(
                                         RolesRelationManager::class,

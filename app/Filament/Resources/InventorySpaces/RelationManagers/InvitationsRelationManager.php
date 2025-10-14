@@ -2,18 +2,10 @@
 
 namespace App\Filament\Resources\InventorySpaces\RelationManagers;
 
-use Filament\Actions\AssociateAction;
+use App\Http\Controllers\InventorySpaceController;
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\DissociateAction;
-use Filament\Actions\DissociateBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -71,6 +63,7 @@ class InvitationsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
+                InventorySpaceController::handleCreateUserInvitation()
             ])
             ->recordActions([
                 DeleteAction::make(),

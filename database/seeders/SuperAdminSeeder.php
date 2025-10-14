@@ -17,6 +17,7 @@ class SuperAdminSeeder extends Seeder
             [
                 'name' => 'Nico',
                 'email' => 'nico@dev.com',
+                'username' => 'spartokos99',
                 'password' => bcrypt('1'),
                 'created_at' => now(),
                 'updated_at'=> now()
@@ -24,6 +25,7 @@ class SuperAdminSeeder extends Seeder
             [
                 'name'=> 'Matts',
                 'email'=> 'matts@dev.com',
+                'username' => 'kedaron',
                 'password'=> bcrypt('nudel'),
                 'created_at' => now(),
                 'updated_at'=> now(),

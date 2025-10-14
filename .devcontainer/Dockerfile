@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libonig-dev \
     libsqlite3-dev \
+    sqlite3 \
     && rm -rf /var/lib/apt/lists/* \
     && sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended \
     && chsh -s $(which zsh)

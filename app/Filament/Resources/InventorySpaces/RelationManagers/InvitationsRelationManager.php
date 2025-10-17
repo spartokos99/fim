@@ -63,7 +63,7 @@ class InvitationsRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                InventorySpaceController::handleCreateUserInvitation()
+                InventorySpaceController::handleCreateInvitation()
             ])
             ->recordActions([
                 DeleteAction::make(),

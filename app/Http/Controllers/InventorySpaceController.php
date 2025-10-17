@@ -69,7 +69,7 @@ class InventorySpaceController extends Controller
             });
     }
 
-    public static function handleCreateUserInvitation(): Action
+    public static function handleCreateInvitation(): Action
     {
         return Action::make('inviteUserAction')
             ->modalIcon(Heroicon::Envelope)
